@@ -17,3 +17,6 @@ release.properties
 
 #Vim
 *~
+
+build/
+.gradle/

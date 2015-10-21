@@ -6,7 +6,7 @@
     <groupId>org.seedstack.samples.catalog</groupId>
     <artifactId>catalog-microservice-sample</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <name>catalog</name>
 
     <properties>
         <coveralls-maven-plugin.version>3.1.0</coveralls-maven-plugin.version>
@@ -18,6 +18,8 @@
         <maven.compiler.target>1.6</maven.compiler.target>
 
         <seedstack-distribution.version>15.7</seedstack-distribution.version>
+        <project.build.finalName>catalog</project.build.finalName>
+        <seed.version>2.1.0-M1-SNAPSHOT</seed.version>
     </properties>
 
     <build>
@@ -50,6 +52,23 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.seedstack</groupId>
+                <artifactId>seedstack-maven-plugin</artifactId>
+                <version>2.1.0-SNAPSHOT</version>
+                <configuration>
+                    <standalone>true</standalone>
+                    <allowSnapshots>true</allowSnapshots>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package-capsule</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
@@ -183,15 +202,68 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.seedstack.seed</groupId>
+                <artifactId>seed-bom</artifactId>
+                <version>${seed.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
         <!-- Rest composite provides main features -->
+        <!--<dependency>-->
+            <!--<groupId>org.seedstack</groupId>-->
+            <!--<artifactId>rest-composite</artifactId>-->
+            <!--<type>pom</type>-->
+        <!--</dependency>-->
+
+
+        <!-- START :: FROM REST COMPOSITE -->
         <dependency>
-            <groupId>org.seedstack</groupId>
-            <artifactId>rest-composite</artifactId>
-            <type>pom</type>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-core-support-specs</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-core-support-core</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-security-support-core</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-web-support-core</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-web-support-security</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-rest-support-jersey1</artifactId>
+            <version>${seed.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seedstack.business</groupId>
+            <artifactId>business-core</artifactId>
+        </dependency>
+        <!-- END :: FROM REST COMPOSITE -->
+
+
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-web-support-undertow</artifactId>
+            <version>${seed.version}</version>
         </dependency>
 
         <!-- Persistence -->

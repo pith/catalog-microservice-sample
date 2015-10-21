@@ -28,5 +28,6 @@ public class ProductAssemblerIT {
         Assertions.assertThat(representation).isNotNull();
         Assertions.assertThat(((Link) representation.getLink("self")).getHref()).isEqualTo("/products/productName");
         Assertions.assertThat(((Link) representation.getLink("tags")).getHref()).isEqualTo("/products/productName/tags");
+        throw new IllegalArgumentException();
     }
 }
